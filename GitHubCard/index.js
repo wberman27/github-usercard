@@ -5,6 +5,7 @@ import axios from 'axios'
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const github = axios.get('https://api.github.com/users/wberman27')
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -18,6 +19,9 @@ import axios from 'axios'
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+const cards = document.querySelector('.cards');
+
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -51,6 +55,45 @@ const followersArray = [];
       </div>
     </div>
 */
+function cardMaker (obj) {
+  const card = document.createElement('div')
+  card.classList.add('card');
+
+  const img = document.createElement('img');
+  img.setAttribute('src','https://api.github.com/users/wberman27')
+
+  const cardInfo = document.createElement('div')
+  cardInfo.classList.add('card-info');
+
+  const name = document.createElement('h3');
+  name.classList.add('name');
+
+  const username = document.createElement('p');
+  username.classList.add('username');
+
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const address = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(address);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+  
+}
+
+
+
 
 /*
   List of LS Instructors Github username's:
