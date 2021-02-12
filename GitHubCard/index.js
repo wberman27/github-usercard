@@ -5,7 +5,7 @@ import axios from 'axios'
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-const github = axios.get('https://api.github.com/users/wberman27')
+console.log(axios.get('https://api.github.com/users/wberman27'))
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -21,6 +21,14 @@ const github = axios.get('https://api.github.com/users/wberman27')
 */
 const cards = document.querySelector('.cards');
 
+axios.get('https://api.github.com/users/wberman27')
+.then(res =>{
+    cards.appendChild(cardMaker(res.data));
+  })
+
+.catch(err =>{
+  console.log(err);
+})
 
 
 /*
@@ -60,23 +68,39 @@ function cardMaker (obj) {
   card.classList.add('card');
 
   const img = document.createElement('img');
-  img.setAttribute('src','https://api.github.com/users/wberman27')
+  img.setAttribute(`src`, `${obj['avatar_url']}`)
 
   const cardInfo = document.createElement('div')
   cardInfo.classList.add('card-info');
 
   const name = document.createElement('h3');
   name.classList.add('name');
+  name.textContent = obj["name"];
 
   const username = document.createElement('p');
   username.classList.add('username');
+  username.textContent = obj["login"]
 
   const location = document.createElement('p');
+  location.textContent = `Location: ${obj["location"]}`
+
   const profile = document.createElement('p');
   const address = document.createElement('a');
+  profile.appendChild(address);
+  profile.textContent = `Profile: `
+  address.setAttribute('href', `https://github.com/${obj['login']}`)
+  address.textContent = `https://github.com/${obj['login']}`
+
   const followers = document.createElement('p');
+  followers.textContent = `Followers: ${obj["followers"]}`
+
   const following = document.createElement('p');
+  following.textContent = `Following: ${obj["following"]}`
+
   const bio = document.createElement('p');
+  bio.textContent = `Bio: ${obj["bio"]} `
+
+  
 
   card.appendChild(img);
   card.appendChild(cardInfo);
@@ -89,6 +113,8 @@ function cardMaker (obj) {
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
+
+  return card;
   
 }
 
