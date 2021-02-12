@@ -22,7 +22,7 @@ import axios from 'axios'
 */
 const cards = document.querySelector('.cards');
 
-axios.get('https://api.github.com/users/wberman27')
+axios.get('https://api.github.com/users/wberman27') //get my profile github data, append it to cards
 .then(res =>{
     cards.appendChild(cardMaker(res.data));
   })
@@ -46,7 +46,7 @@ axios.get('https://api.github.com/users/wberman27')
 const followersArray = ['marilynle', 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
 followersArray.forEach(n =>{
-  axios.get(`https://api.github.com/users/${n}`)
+  axios.get(`https://api.github.com/users/${n}`) //for each name in the array, add that name to the end of the github url
 .then(res =>{
     cards.appendChild(cardMaker(res.data));
   })
@@ -76,7 +76,7 @@ followersArray.forEach(n =>{
     </div>
 */
 function cardMaker (obj) {
-  const card = document.createElement('div')
+  const card = document.createElement('div') //create all these elements and give them class names
   card.classList.add('card');
 
   const img = document.createElement('img');
@@ -87,7 +87,7 @@ function cardMaker (obj) {
 
   const name = document.createElement('h3');
   name.classList.add('name');
-  name.textContent = obj["name"];
+  name.textContent = obj["name"]; //the name key in the obj will be the textcontent for this h3
 
   const username = document.createElement('p');
   username.classList.add('username');
@@ -99,9 +99,9 @@ function cardMaker (obj) {
   const profile = document.createElement('p');
   const address = document.createElement('a');
   profile.textContent = `Profile: `;
-  address.setAttribute('href', `https://github.com/${obj['login']}`);
+  address.setAttribute('href', `https://github.com/${obj['login']}`); 
   address.textContent = `https://github.com/${obj['login']}`;
-  profile.appendChild(address);
+  profile.appendChild(address); //make the <a> tag a child of profile
 
   const followers = document.createElement('p');
   followers.textContent = `Followers: ${obj["followers"]}`
@@ -114,10 +114,10 @@ function cardMaker (obj) {
 
   
 
-  card.appendChild(img);
+  card.appendChild(img); //card has these two elements as children
   card.appendChild(cardInfo);
 
-  cardInfo.appendChild(name);
+  cardInfo.appendChild(name); //cardInfo has all the other elements (except the url under profile) appended as children
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
